@@ -13,6 +13,7 @@ Your app should include all (required) and at least one (optional). You are also
    -  How many passengers; adults (12+) and/or children
 
 -  (required) A display list of flights after search.
+
 -  (required) The list should include cards with flight information displayed. If a round trip is selected it should either show a card for each possible flight combination (back and forth), or let the user first select a departure flight and then select a return flight (possible inspiration for this could be https://www.norwegian.com/).
 
 -  (required) Each card should display; the destinations together with time of departure & arrival, duration of flight and price for adults
