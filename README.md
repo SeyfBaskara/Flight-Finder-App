@@ -15,12 +15,13 @@ This week you are going to build a simple flight booking app. A user should be a
 
 Your app should include all (required) and at least one (optional). You are also encouraged to go beyond these requirements, if you come up with more features that will add value to your app just add them as well!
 
--  (required) A search bar 
-   ◦ (required) A proper search must include: 
-   ◦ Departure destination and arrival destination 
-   ◦ One way trip or round trip
-   ◦ Departure date, and possible Return date (Feel free to use libraries like react-datepicker here)
-   ◦ How many passengers; adults (12+) and/or children
+-  (required) A search bar
+
+   -  (required) A proper search must include:
+   -  Departure destination and arrival destination
+   -  One way trip or round trip
+   -  Departure date, and possible Return date (Feel free to use libraries like react-datepicker here)
+   -  How many passengers; adults (12+) and/or children
 
 -  (required) A display list of flights after search.
 -  (required) The list should include cards with flight information displayed. If a round trip is selected it should either show a card for each possible flight combination (back and forth), or let the user first select a departure flight and then select a return flight (possible inspiration for this could be https://www.norwegian.com/).
