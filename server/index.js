@@ -15,7 +15,7 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/searchtrip', async (req, res) => {
-   const { departure, arrival, adult, child, roundTrip } = req.body
+   const { departure, arrival, adult, child, typeOfTrip } = req.body
 
    try {
       if (!departure || !arrival) {
@@ -26,7 +26,7 @@ app.post('/searchtrip', async (req, res) => {
       const returnTrip = await getReturnTrip(departure, arrival, adult, child)
 
       setTimeout(() => {
-         if (!roundTrip) {
+         if (typeOfTrip === 'oneway') {
             res.json({ data: { oneWayTrip, returnTrip: [] }, message: 'success' })
          } else {
             res.json({ data: { oneWayTrip, returnTrip }, message: 'success' })
