@@ -6,16 +6,19 @@ export const getOneWayTrip = async (departure, arrival, adult, child) => {
    const data = await readData()
 
    const trip = data.filter((flight) => {
-      if (flight.depatureDestination === departure && flight.arrivalDestination === arrival) {
+      if (
+         flight.depatureDestination.toLowerCase() === departure &&
+         flight.arrivalDestination.toLowerCase() === arrival
+      ) {
          return flight
       }
    })
 
-   const itineraries = trip[0].itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
+   const itineraries = trip[0]?.itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
    const tripData = {
-      flight_id: trip[0].flight_id,
-      depatureDestination: trip[0].depatureDestination,
-      arrivalDestination: trip[0].arrivalDestination,
+      flight_id: trip[0]?.flight_id,
+      depatureDestination: trip[0]?.depatureDestination,
+      arrivalDestination: trip[0]?.arrivalDestination,
       itineraries,
    }
 
@@ -30,16 +33,19 @@ export const getReturnTrip = async (departure, arrival, adult, child) => {
    const data = await readData()
 
    const trip = data.filter((flight) => {
-      if (flight.depatureDestination === departureDest && flight.arrivalDestination === arrivalDest) {
+      if (
+         flight.depatureDestination.toLowerCase() === departureDest &&
+         flight.arrivalDestination.toLowerCase() === arrivalDest
+      ) {
          return flight
       }
    })
 
-   const itineraries = trip[0].itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
+   const itineraries = trip[0]?.itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
    const tripData = {
-      flight_id: trip[0].flight_id,
-      depatureDestination: trip[0].depatureDestination,
-      arrivalDestination: trip[0].arrivalDestination,
+      flight_id: trip[0]?.flight_id,
+      depatureDestination: trip[0]?.depatureDestination,
+      arrivalDestination: trip[0]?.arrivalDestination,
       itineraries,
    }
 

@@ -14,19 +14,21 @@ app.get('/', async (req, res) => {
    res.send('health check')
 })
 
-app.post('/searchtrip', async (req, res) => {
+app.post('/api/searchtrip', async (req, res) => {
    const { departure, arrival, adult, child, typeOfTrip } = req.body
+   const departureDest = departure.toLowerCase()
+   const arrivalDest = arrival.toLowerCase()
 
    try {
       if (!departure || !arrival) {
          throw new Error('Error accurs on request body, please check input values')
       }
 
-      const oneWayTrip = await getOneWayTrip(departure, arrival, adult, child)
-      const returnTrip = await getReturnTrip(departure, arrival, adult, child)
+      const oneWayTrip = await getOneWayTrip(departureDest, arrivalDest, adult, child)
+      const returnTrip = await getReturnTrip(departureDest, arrivalDest, adult, child)
 
       setTimeout(() => {
-         if (typeOfTrip === 'oneway') {
+         if (typeOfTrip.toLowerCase() === 'oneway') {
             res.json({ data: { oneWayTrip, returnTrip: [] }, message: 'success' })
          } else {
             res.json({ data: { oneWayTrip, returnTrip }, message: 'success' })
