@@ -2,26 +2,23 @@ import React, { useState } from 'react'
 import ReactDatePicker from './ReactDatePicker'
 import Travellers from './Travellers'
 
-interface UserInputState {
-   departure: string
-   arrival: string
-   adult: number
-   child: number
-   typeOfTrip: string
+const initialUserState = {
+   departure: '',
+   arrival: '',
+   adult: 1,
+   child: 0,
+   typeOfTrip: 'oneway',
+   departureDate: null,
+   returnDate: null,
 }
 
 const Form = () => {
-   const [user, setUser] = useState<UserInputState>({
-      departure: '',
-      arrival: '',
-      adult: 1,
-      child: 0,
-      typeOfTrip: 'oneway',
-   })
+   const [user, setUser] = useState<UserInputState>(initialUserState)
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       console.log(user)
+      setUser(initialUserState)
    }
 
    const handleOnChange = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -76,7 +73,7 @@ const Form = () => {
                   />
                </label>
 
-               <ReactDatePicker />
+               <ReactDatePicker user={user} setUser={setUser} />
                <Travellers user={user} setUser={setUser} />
             </div>
             <input

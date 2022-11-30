@@ -4,4 +4,6 @@ interface UserInputState {
    adult: number
    child: number
    typeOfTrip: string
+   departureDate: Date | null
+   returnDate: Date | null
 }

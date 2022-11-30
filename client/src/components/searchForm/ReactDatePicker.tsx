@@ -1,29 +1,34 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const ReactDatePicker = () => {
-   const [startDate, setStartDate] = useState<Date | null>(null)
-   const [endDate, setEndDate] = useState<Date | null>(null)
+interface IProps {
+   user: UserInputState
+   setUser: Dispatch<SetStateAction<UserInputState>>
+}
 
+const ReactDatePicker = ({ user, setUser }: IProps): JSX.Element => {
    return (
       <div className="flex">
          <label className="flex flex-col text-md">
             Depart
             <DatePicker
                className="border-2 rounded-sm py-3 px-5 text-md font-normal"
-               selected={startDate}
-               onChange={(date: Date) => setStartDate(date)}
+               selected={user.departureDate}
+               onChange={(date: Date) => setUser({ ...user, departureDate: date })}
                placeholderText="Select date"
+               required
             />
          </label>
          <label className="flex flex-col text-md">
             Return
             <DatePicker
                className="border-2 rounded-sm py-3 px-5 text-md font-normal"
-               selected={endDate}
-               onChange={(date: Date) => setEndDate(date)}
+               selected={user.returnDate}
+               onChange={(date: Date) => setUser({ ...user, returnDate: date })}
                placeholderText="Select date"
+               disabled={user.typeOfTrip === 'oneway' && true}
+               required
             />
          </label>
       </div>
