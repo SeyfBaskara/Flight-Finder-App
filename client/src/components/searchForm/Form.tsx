@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactDatePicker from './ReactDatePicker'
 import Travellers from './Travellers'
+import { useSearchFlightContext } from '../../context/SearchFlightContext'
 
 const initialUserState = {
    departure: '',
@@ -14,10 +15,11 @@ const initialUserState = {
 
 const Form = () => {
    const [user, setUser] = useState<UserInputState>(initialUserState)
+   const { getFlights } = useSearchFlightContext()
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      console.log(user)
+      getFlights(user)
       setUser(initialUserState)
    }
 
