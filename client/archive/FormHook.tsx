@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import DateSelection from '../src/components/searchForm/DateSelection'
+import DateSelection from '../src/components/searchForm/ReactDatePicker'
 
 type FormValues = {
    departure: string

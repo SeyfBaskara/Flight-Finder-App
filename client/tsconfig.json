@@ -16,5 +16,5 @@
       "noEmit": true,
       "jsx": "react-jsx"
    },
-   "include": ["src", "archive/FormHook.tsx"]
+   "include": ["src", "archive/FormHook.tsx", "**/*.ts", "**/*.tsx"]
 }
