@@ -27,11 +27,16 @@ app.post('/api/searchtrip', async (req, res) => {
       const oneWayTrip = await getOneWayTrip(departureDest, arrivalDest, adult, child)
       const returnTrip = await getReturnTrip(departureDest, arrivalDest, adult, child)
 
+      if (oneWayTrip === undefined || returnTrip === undefined) {
+         res.json({ message: 'No flight avaiable at these destination' })
+         return
+      }
+
       setTimeout(() => {
          if (typeOfTrip.toLowerCase() === 'oneway') {
-            res.json({ data: { oneWayTrip, returnTrip: [] }, message: 'success' })
+            res.json({ oneWayTrip, returnTrip: [], message: 'success' })
          } else {
-            res.json({ data: { oneWayTrip, returnTrip }, message: 'success' })
+            res.json({ oneWayTrip, returnTrip, message: 'success' })
          }
       }, 3000)
    } catch (error) {
