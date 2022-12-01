@@ -7,16 +7,16 @@ Your app should include all (required) and at least one (optional). You are also
 -  (required) A search bar
 
    -  (required) A proper search must include:
-   -  Departure destination and arrival destination
-   -  One way trip or round trip
-   -  Departure date, and possible Return date (Feel free to use libraries like react-datepicker here)
-   -  How many passengers; adults (12+) and/or children
+   -  Departure destination and arrival destination✅
+   -  One way trip or round trip✅
+   -  Departure date, and possible Return date (Feel free to use libraries like react-datepicker here)✅
+   -  How many passengers; adults (12+) and/or children✅
 
--  (required) A display list of flights after search.
+-  (required) A display list of flights after search.✅
 
--  (required) The list should include cards with flight information displayed. If a round trip is selected it should either show a card for each possible flight combination (back and forth), or let the user first select a departure flight and then select a return flight (possible inspiration for this could be https://www.norwegian.com/).
+-  (required) The list should include cards with flight information displayed. If a round trip is selected it should either show a card for each possible flight combination (back and forth), or let the user first select a departure flight and then select a return flight (possible inspiration for this could be https://www.norwegian.com/).✅
 
--  (required) Each card should display; the destinations together with time of departure & arrival, duration of flight and price for adults
+-  (required) Each card should display; the destinations together with time of departure & arrival, duration of flight and price for adults✅
 
 -  (required) Users should be able to click on a card and get information on available seats and the price for both adults and children, and also be displayed with the “book” button. This could show by expanding the card size, but exactly how is up to you
 

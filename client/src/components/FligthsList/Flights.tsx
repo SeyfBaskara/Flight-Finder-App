@@ -8,6 +8,7 @@ const Flights = () => {
    const {
       oneWayTrip: { depatureDestination, arrivalDestination, itineraries },
    } = flights
+
    return (
       <div className="mt-4">
          {isLoading ? (
@@ -20,7 +21,7 @@ const Flights = () => {
                {flights.message !== 'success' ? (
                   <p className="text-2xl font-semibold text-gray-500 text-center">{flights.message}</p>
                ) : (
-                  <ul className="flex flex-col gap-5">
+                  <ul className="flex flex-col gap-5 ml-10">
                      {itineraries.map((item, index) => (
                         <li key={index}>
                            <Flight depatureDest={depatureDestination} arrivalDest={arrivalDestination} flight={item} />
