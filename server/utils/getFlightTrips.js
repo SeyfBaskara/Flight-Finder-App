@@ -15,19 +15,15 @@ export const getOneWayTrip = async (departure, arrival, adult, child) => {
    })
 
    if (trip.length !== 0) {
-      const itineraries = trip[0].itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
-      const tripData = {
+      return {
          flight_id: trip[0].flight_id,
          depatureDestination: trip[0].depatureDestination,
          arrivalDestination: trip[0].arrivalDestination,
-         itineraries,
+         itineraries: trip[0].itineraries.filter((board) => board.avaliableSeats >= totalPessanger),
       }
-
-      return tripData
    }
 }
 
-// console.log(await getOneWayTrip('stockholm', 'lund', 1, 0))
 export const getReturnTrip = async (departure, arrival, adult, child) => {
    const totalPessanger = adult + child
    const departureDest = arrival
@@ -45,14 +41,11 @@ export const getReturnTrip = async (departure, arrival, adult, child) => {
    })
 
    if (trip.length !== 0) {
-      const itineraries = trip[0]?.itineraries.filter((board) => board.avaliableSeats >= totalPessanger)
-      const tripData = {
+      return {
          flight_id: trip[0]?.flight_id,
          depatureDestination: trip[0]?.depatureDestination,
          arrivalDestination: trip[0]?.arrivalDestination,
-         itineraries,
+         itineraries: trip[0]?.itineraries.filter((board) => board.avaliableSeats >= totalPessanger),
       }
-
-      return tripData
    }
 }
