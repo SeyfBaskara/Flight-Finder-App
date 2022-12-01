@@ -10,7 +10,7 @@ interface UserInputState {
 
 interface FlightData {
    oneWayTrip: FlightDetails
-   returnTrip: FlightDetails | []
+   returnTrip: FlightDetails
    message: string
 }
 
