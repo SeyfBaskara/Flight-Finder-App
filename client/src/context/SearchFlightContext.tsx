@@ -9,7 +9,6 @@ type SearchFlightContext = {
    getFlights: (userInput: UserInputState) => void
    getDestinationHours: (flight: FlightItinerarie) => IGetDestHourFunc
    getFlightPrice: (flight: FlightItinerarie) => IGetFlightPriceFunc
-
    flights: FlightData
    isLoading: boolean
 }
@@ -69,9 +68,10 @@ const SearchFlightContext = createContext({} as SearchFlightContext)
 
 const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
    const [flights, setFlights] = useState<FlightData>(initialState)
-   const [isLoading, setIsLoading] = useState<boolean>(true)
+   const [isLoading, setIsLoading] = useState<boolean>(false)
 
    const getFlights = async (userInput: UserInputState) => {
+      setIsLoading(true)
       try {
          const { data } = await API.searchTrips(userInput)
          if (data.message === 'success') {
@@ -85,6 +85,7 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          console.log(error)
       }
    }
+
    const getDestinationHours = (flight: FlightItinerarie): IGetDestHourFunc => {
       const depatureAt = flight.depatureAt.match(/[0-9]+:[0-9]+/i)![0]
       const arriveAt = flight.arriveAt.match(/[0-9]+:[0-9]+/i)![0]
@@ -99,6 +100,7 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          totalHour,
       }
    }
+
    const getFlightPrice = (flight: FlightItinerarie): IGetFlightPriceFunc => {
       const { currency, adult, child } = flight.prices[0]
       return {
