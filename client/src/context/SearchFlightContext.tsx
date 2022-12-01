@@ -92,7 +92,11 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
       const [DepAtHour, depAtTime] = depatureAt.split(':').map((item) => parseInt(item))
       const [arrAtHour, arrAtTime] = arriveAt.split(':').map((item) => parseInt(item))
       const totalHour = `${arrAtHour - DepAtHour}h:${
-         arrAtTime - depAtTime < 10 ? '0' + (arrAtTime - depAtTime) : arrAtTime - depAtTime
+         depAtTime > arrAtTime
+            ? depAtTime
+            : arrAtTime - depAtTime < 10
+            ? '0' + (arrAtTime - depAtTime)
+            : arrAtTime - depAtTime
       }`
       return {
          depatureAt,
