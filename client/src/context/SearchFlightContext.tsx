@@ -6,13 +6,13 @@ type SearchFlightProviderProps = {
 }
 
 type SearchFlightContext = {
-   getFlights: (userInput: UserInputState) => void
-   getDestinationHours: (flight: FlightItinerarie) => IGetDestHourFunc
-   getFlightPrice: (flight: FlightItinerarie) => IGetFlightPriceFunc
-   getBookFlight: (bookFlight: FlightData) => void
-   flights: FlightData
+   getFlights: (userInput: IUserInputState) => void
+   getDestinationHours: (flight: IFlightItinerarie) => IGetDestHourFunc
+   getFlightPrice: (flight: IFlightItinerarie) => IGetFlightPriceFunc
+   getBookFlight: (bookFlight: IFlightData) => void
+   flights: IFlightData
    isLoading: boolean
-   bookFlightCart: FlightData | {}
+   bookFlightCart: IFlightData | {}
 }
 interface IGetDestHourFunc {
    depatureAt: string
@@ -43,6 +43,10 @@ const initialState = {
             ],
          },
       ],
+      passengers: {
+         adult: 1,
+         child: 0,
+      },
    },
    returnTrip: {
       arrivalDestination: '',
@@ -62,6 +66,10 @@ const initialState = {
             ],
          },
       ],
+      passengers: {
+         adult: 1,
+         child: 0,
+      },
    },
    message: '',
 }
@@ -69,11 +77,11 @@ const initialState = {
 const SearchFlightContext = createContext({} as SearchFlightContext)
 
 const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
-   const [flights, setFlights] = useState<FlightData>(initialState)
-   const [bookFlightCart, setBookFlightCart] = useState<FlightData | {}>({})
+   const [flights, setFlights] = useState<IFlightData>(initialState)
+   const [bookFlightCart, setBookFlightCart] = useState<IFlightData | {}>({})
    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-   const getFlights = async (userInput: UserInputState) => {
+   const getFlights = async (userInput: IUserInputState) => {
       setIsLoading(true)
       try {
          const { data } = await API.searchTrips(userInput)
@@ -88,7 +96,7 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          console.log(error)
       }
    }
-   const getDestinationHours = (flight: FlightItinerarie): IGetDestHourFunc => {
+   const getDestinationHours = (flight: IFlightItinerarie): IGetDestHourFunc => {
       const depatureAt = flight.depatureAt.match(/[0-9]+:[0-9]+/i)![0]
       const arriveAt = flight.arriveAt.match(/[0-9]+:[0-9]+/i)![0]
       const [DepAtHour, depAtTime] = depatureAt.split(':').map((item) => parseInt(item))
@@ -106,7 +114,7 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          totalHour,
       }
    }
-   const getFlightPrice = (flight: FlightItinerarie): IGetFlightPriceFunc => {
+   const getFlightPrice = (flight: IFlightItinerarie): IGetFlightPriceFunc => {
       const { currency, adult, child } = flight.prices[0]
       return {
          currency,
@@ -114,7 +122,7 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          child,
       }
    }
-   const getBookFlight = (bookFlight: FlightData) => {
+   const getBookFlight = (bookFlight: IFlightData) => {
       setBookFlightCart(bookFlight)
    }
 

@@ -1,4 +1,4 @@
-interface UserInputState {
+interface IUserInputState {
    departure: string
    arrival: string
    adult: number
@@ -8,28 +8,33 @@ interface UserInputState {
    returnDate: Date | null
 }
 
-interface FlightData {
-   oneWayTrip: FlightDetails
-   returnTrip?: FlightDetails
+interface IFlightData {
+   oneWayTrip: IFlightDetails
+   returnTrip?: IFlightDetails
    message: string
 }
 
-interface FlightDetails {
+interface IFlightDetails {
    arrivalDestination: string
    depatureDestination: string
    flight_id: string
-   itineraries: FlightItinerarie[]
+   itineraries: IFlightItinerarie[]
+   passengers: Passengers
 }
 
-interface FlightItinerarie {
+interface IFlightItinerarie {
    arriveAt: string
    avaliableSeats: number
    depatureAt: string
-   prices: FlightPrice[]
+   prices: IFlightPrice[]
 }
 
-interface FlightPrice {
+interface IFlightPrice {
    adult: number
    child: number
    currency: string
+}
+interface IPassengers {
+   adult: number
+   child: number
 }

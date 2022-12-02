@@ -2,20 +2,32 @@ import { useState } from 'react'
 import { useSearchFlightContext } from '../../context/SearchFlightContext'
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
+import FlightDetails from './FlightDetails'
+import FlightPassengerDetails from './FlightPassengerDetails'
 
 interface IProps {
    depatureDestination: string
    arrivalDestination: string
    flightID: string
+   passengers: IPassengers
    index: number
-   flight: FlightItinerarie
+   flight: IFlightItinerarie
    roundTrip?: boolean
+   message?: string
 }
 
-const Flight = ({ depatureDestination, arrivalDestination, flight, flightID, index, roundTrip = false }: IProps) => {
-   const { getDestinationHours, getFlightPrice, getBookFlight } = useSearchFlightContext()
+const Flight = ({
+   depatureDestination,
+   arrivalDestination,
+   flight,
+   flightID,
+   passengers,
+   index,
+   roundTrip = false,
+   message = '',
+}: IProps) => {
+   const { getDestinationHours, getBookFlight } = useSearchFlightContext()
    const { depatureAt, arriveAt, totalHour } = getDestinationHours(flight)
-   const { adult, child, currency } = getFlightPrice(flight)
 
    const [isFlightSelected, setIsFlightSelected] = useState<boolean>(false)
    const [selectedIndex, setSelectedIndex] = useState<number>()
@@ -26,7 +38,13 @@ const Flight = ({ depatureDestination, arrivalDestination, flight, flightID, ind
    const handleSelect = () => {
       if (!roundTrip) {
          getBookFlight({
-            oneWayTrip: { depatureDestination, arrivalDestination, flight_id: flightID, itineraries: [flight] },
+            oneWayTrip: {
+               depatureDestination,
+               arrivalDestination,
+               flight_id: flightID,
+               itineraries: [flight],
+               passengers,
+            },
             message: 'booked',
          })
          navigate('/booking')
@@ -63,37 +81,13 @@ const Flight = ({ depatureDestination, arrivalDestination, flight, flightID, ind
             )}
          </div>
          {hasExpand && (
-            <div className="flex items-center justify-between">
-               <div className="p-5 flex items-center gap-5">
-                  <p className="flex flex-col items-center gap-2 text-gray-500">
-                     Avaiable Seats <span className="font-semibold text-gray-700">{flight.avaliableSeats}</span>
-                  </p>
-                  <p className="flex flex-col items-center gap-2 text-gray-500">
-                     Adult
-                     <span className="font-semibold text-gray-700">
-                        {adult} {currency}
-                     </span>
-                  </p>
-                  <p className="flex flex-col items-center gap-2 text-gray-500">
-                     Children
-                     <span className="font-semibold text-gray-700">
-                        {child} {currency}
-                     </span>
-                  </p>
-               </div>
-               <div className="flex flex-col items-center border-l-2 gap-1 p-5">
-                  <p className="text-lg font-semibold text-gray-700">
-                     {adult}
-                     <span className="pl-1">{currency}</span>
-                  </p>
-                  <button
-                     className="tracking-widest rounded-md w-28 font-bold p-2 text-white bg-skyGreen cursor-pointer"
-                     onClick={handleSelect}
-                  >
-                     Select
-                  </button>
-               </div>
-            </div>
+            <>
+               {message === 'booked' ? (
+                  <FlightPassengerDetails />
+               ) : (
+                  <FlightDetails flight={flight} handleSelectFunc={handleSelect} />
+               )}
+            </>
          )}
       </section>
    )

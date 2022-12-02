@@ -3,8 +3,8 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 interface IProps {
-   user: UserInputState
-   setUser: Dispatch<SetStateAction<UserInputState>>
+   user: IUserInputState
+   setUser: Dispatch<SetStateAction<IUserInputState>>
 }
 
 const ReactDatePicker = ({ user, setUser }: IProps): JSX.Element => {

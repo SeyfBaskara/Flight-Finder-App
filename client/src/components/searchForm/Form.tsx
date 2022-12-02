@@ -14,7 +14,7 @@ const initialUserState = {
 }
 
 const Form = () => {
-   const [user, setUser] = useState<UserInputState>(initialUserState)
+   const [user, setUser] = useState<IUserInputState>(initialUserState)
    const { getFlights } = useSearchFlightContext()
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

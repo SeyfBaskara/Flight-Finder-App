@@ -1,8 +1,8 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
 interface IProps {
-   user: UserInputState
-   setUser: Dispatch<SetStateAction<UserInputState>>
+   user: IUserInputState
+   setUser: Dispatch<SetStateAction<IUserInputState>>
 }
 
 const Travellers = ({ user, setUser }: IProps): JSX.Element => {

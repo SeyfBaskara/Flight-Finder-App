@@ -2,7 +2,7 @@ import React from 'react'
 import Flight from './Flight'
 
 interface IProps {
-   returnTrip: FlightDetails
+   returnTrip: IFlightDetails
    roundTrip: boolean
 }
 
@@ -17,6 +17,7 @@ const ReturnFlight = ({ returnTrip, roundTrip }: IProps): JSX.Element => {
                      depatureDestination={returnTrip?.depatureDestination}
                      arrivalDestination={returnTrip?.arrivalDestination}
                      flightID={returnTrip?.flight_id}
+                     passengers={returnTrip.passengers}
                      roundTrip={roundTrip}
                      index={index}
                      flight={item}
