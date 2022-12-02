@@ -1,6 +1,6 @@
 import { readData } from '../database/data.js'
 
-export const getOneWayTrip = async (departure, arrival, adult, child) => {
+export const getOneWayTrip = async (departure, arrival, adult, child, departureDate) => {
    const totalPessanger = adult + child || 1
 
    const data = await readData()
@@ -20,11 +20,12 @@ export const getOneWayTrip = async (departure, arrival, adult, child) => {
          depatureDestination: trip[0].depatureDestination,
          arrivalDestination: trip[0].arrivalDestination,
          itineraries: trip[0].itineraries.filter((board) => board.avaliableSeats >= totalPessanger),
+         passengers: { adult, child },
       }
    }
 }
 
-export const getReturnTrip = async (departure, arrival, adult, child) => {
+export const getReturnTrip = async (departure, arrival, adult, child, returnDate) => {
    const totalPessanger = adult + child
    const departureDest = arrival
    const arrivalDest = departure
@@ -46,6 +47,7 @@ export const getReturnTrip = async (departure, arrival, adult, child) => {
          depatureDestination: trip[0]?.depatureDestination,
          arrivalDestination: trip[0]?.arrivalDestination,
          itineraries: trip[0]?.itineraries.filter((board) => board.avaliableSeats >= totalPessanger),
+         passengers: { adult, child },
       }
    }
 }
