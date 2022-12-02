@@ -4,6 +4,11 @@
 
 This week you are going to build a simple flight booking app. A user should be able to search for flights, get the possible flights displayed and be able to book.You won’t be connecting to a real flight search API, but for a start just some hard-coded data in your backend.
 
+## How to run locally:
+
+-  Frontend: cd --> client --> npm run start
+-  Backend: cd --> server --> npm run start
+
 ## Tech stack to use:
 
 -  Language: TypeScript
