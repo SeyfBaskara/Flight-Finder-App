@@ -4,16 +4,16 @@ import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 
 interface IProps {
-   depatureDest: string
-   arrivalDest: string
+   depatureDestination: string
+   arrivalDestination: string
    flightID: string
    index: number
    flight: FlightItinerarie
-   roundTrip: boolean
+   roundTrip?: boolean
 }
 
-const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip }: IProps) => {
-   const { getDestinationHours, getFlightPrice } = useSearchFlightContext()
+const Flight = ({ depatureDestination, arrivalDestination, flight, flightID, index, roundTrip = false }: IProps) => {
+   const { getDestinationHours, getFlightPrice, getBookFlight } = useSearchFlightContext()
    const { depatureAt, arriveAt, totalHour } = getDestinationHours(flight)
    const { adult, child, currency } = getFlightPrice(flight)
 
@@ -25,6 +25,10 @@ const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip 
 
    const handleSelect = () => {
       if (!roundTrip) {
+         getBookFlight({
+            oneWayTrip: { depatureDestination, arrivalDestination, flight_id: flightID, itineraries: [flight] },
+            message: 'booked',
+         })
          navigate('/booking')
       } else {
          setSelectedIndex(index)
@@ -41,7 +45,7 @@ const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip 
          <div className="flex p-5 items-center justify-between border-b-2">
             <div className="flex flex-col gap-1">
                <p className="text-2xl font-semibold text-gray-500">{depatureAt}</p>
-               <p className="text-gray-500">{depatureDest}</p>
+               <p className="text-gray-500">{depatureDestination}</p>
             </div>
             <div className="flex flex-col gap-1">
                <p className="text-sm">{totalHour}</p>
@@ -50,7 +54,7 @@ const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip 
             </div>
             <div className="flex flex-col gap-1">
                <p className="text-2xl font-semibold text-gray-500">{arriveAt}</p>
-               <p className="text-gray-500">{arrivalDest}</p>
+               <p className="text-gray-500">{arrivalDestination}</p>
             </div>
             {!hasExpand ? (
                <KeyboardArrowDown onClick={() => setHasExpand(true)} className="cursor-pointer" />

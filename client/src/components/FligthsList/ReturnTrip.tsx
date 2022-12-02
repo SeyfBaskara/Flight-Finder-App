@@ -14,8 +14,8 @@ const ReturnFlight = ({ returnTrip, roundTrip }: IProps): JSX.Element => {
             {returnTrip?.itineraries?.map((item, index) => (
                <li key={index}>
                   <Flight
-                     depatureDest={returnTrip?.depatureDestination}
-                     arrivalDest={returnTrip?.arrivalDestination}
+                     depatureDestination={returnTrip?.depatureDestination}
+                     arrivalDestination={returnTrip?.arrivalDestination}
                      flightID={returnTrip?.flight_id}
                      roundTrip={roundTrip}
                      index={index}

@@ -20,7 +20,7 @@ Your app should include all (required) and at least one (optional). You are also
 
 -  (required) Users should be able to click on a card and get information on available seats and the price for both adults and children, and also be displayed with the “book” button. This could show by expanding the card size, but exactly how is up to you✅
 
--  (required) The “book” button; clicking on it should redirect to a new URL for booking the specific flight
+-  (required) The “book” button; clicking on it should redirect to a new URL for booking the specific flight✅
 -  (required) In the booking the user should be able to put in their information for each passenger
 -  (required) Before booking is completed the user should be displayed again all info on flight (time, total price for all passengers) and the passenger info they gave, so they can give a final approval. Then a final “book” button, clicking it should tell the user the booking was successful
 -  (required) For each booking the available seats should be updated in your backend
