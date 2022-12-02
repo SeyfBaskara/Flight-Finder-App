@@ -17,7 +17,7 @@ const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip 
    const { depatureAt, arriveAt, totalHour } = getDestinationHours(flight)
    const { adult, child, currency } = getFlightPrice(flight)
 
-   const [isSelected, setIsSelected] = useState<boolean>(false)
+   const [isFlightSelected, setIsFlightSelected] = useState<boolean>(false)
    const [selectedIndex, setSelectedIndex] = useState<number>()
    const [hasExpand, setHasExpand] = useState<boolean>(false)
 
@@ -28,14 +28,14 @@ const Flight = ({ depatureDest, arrivalDest, flight, flightID, index, roundTrip 
          navigate('/booking')
       } else {
          setSelectedIndex(index)
-         setIsSelected(!isSelected)
+         setIsFlightSelected(!isFlightSelected)
       }
    }
 
    return (
       <section
          className={`border-2 rounded-md shadow-sm w-[32rem] ${
-            isSelected && selectedIndex === index && 'border-skyGreen'
+            isFlightSelected && selectedIndex === index && 'border-skyGreen'
          }`}
       >
          <div className="flex p-5 items-center justify-between border-b-2">
