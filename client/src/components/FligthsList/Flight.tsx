@@ -49,6 +49,7 @@ const Flight = ({
          })
          navigate('/booking')
       } else {
+         // uncomplete round trip implementation
          setSelectedIndex(index)
          setIsFlightSelected(!isFlightSelected)
       }
@@ -83,7 +84,7 @@ const Flight = ({
          {hasExpand && (
             <>
                {message === 'booked' ? (
-                  <FlightPassengerDetails />
+                  <FlightPassengerDetails flight={flight} passengers={passengers} />
                ) : (
                   <FlightDetails flight={flight} handleSelectFunc={handleSelect} />
                )}

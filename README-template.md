@@ -22,7 +22,7 @@ Your app should include all (required) and at least one (optional). You are also
 
 -  (required) The “book” button; clicking on it should redirect to a new URL for booking the specific flight✅
 -  (required) In the booking the user should be able to put in their information for each passenger
--  (required) Before booking is completed the user should be displayed again all info on flight (time, total price for all passengers) and the passenger info they gave, so they can give a final approval. Then a final “book” button, clicking it should tell the user the booking was successful
+-  (required) Before booking is completed the user should be displayed again all info on flight (time, total price for all passengers) and the passenger info they gave, so they can give a final approval. Then a final “book” button, clicking it should tell the user the booking was successful✅
 -  (required) For each booking the available seats should be updated in your backend
 -  (required) On search, when fetching the list of flights, your backend should have a timeout of 3 seconds
    ◦ (required) While waiting the UI should show loading here✅
