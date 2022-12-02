@@ -26,7 +26,7 @@ const Flight = ({
    roundTrip = false,
    message = '',
 }: IProps) => {
-   const { getDestinationHours, getBookFlight } = useSearchFlightContext()
+   const { getDestinationHours, setBookFlight } = useSearchFlightContext()
    const { depatureAt, arriveAt, totalHour } = getDestinationHours(flight)
 
    const [isFlightSelected, setIsFlightSelected] = useState<boolean>(false)
@@ -37,7 +37,7 @@ const Flight = ({
 
    const handleSelect = () => {
       if (!roundTrip) {
-         getBookFlight({
+         setBookFlight({
             oneWayTrip: {
                depatureDestination,
                arrivalDestination,

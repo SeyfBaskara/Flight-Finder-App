@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useState, Dispatch, SetStateAction } from 'react'
 import * as API from '../api/index'
 
 type SearchFlightProviderProps = {
@@ -9,11 +9,15 @@ type SearchFlightContext = {
    getFlights: (userInput: IUserInputState) => void
    getDestinationHours: (flight: IFlightItinerarie) => IGetDestHourFunc
    getFlightPrice: (flight: IFlightItinerarie) => IGetFlightPriceFunc
-   getBookFlight: (bookFlight: IFlightData) => void
+   setBookFlight: (bookFlight: IFlightData) => void
+   setApprovedFlight: (hasApproved: boolean, approvedFlight: IApprovedBookFlight) => void
+   setHasApprovedFlight: Dispatch<SetStateAction<boolean>>
    flights: IFlightData
    isLoading: boolean
    bookFlightCart: IFlightData | {}
+   hasApprovedFlight: boolean
 }
+
 interface IGetDestHourFunc {
    depatureAt: string
    arriveAt: string
@@ -23,6 +27,15 @@ interface IGetFlightPriceFunc {
    currency: string
    adult: number
    child: number
+}
+interface IApprovedBookFlight {
+   flight_id: string
+   passengers: {
+      firstName: string
+      lastName: string
+      email: string
+      phone: number
+   }
 }
 const initialState = {
    oneWayTrip: {
@@ -73,6 +86,15 @@ const initialState = {
    },
    message: '',
 }
+const approvedBookFlightState = {
+   flight_id: '',
+   passengers: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: 0,
+   },
+}
 
 const SearchFlightContext = createContext({} as SearchFlightContext)
 
@@ -80,6 +102,9 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
    const [flights, setFlights] = useState<IFlightData>(initialState)
    const [bookFlightCart, setBookFlightCart] = useState<IFlightData | {}>({})
    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+   const [approvedBookFlight, setApprovedBookFlight] = useState<IApprovedBookFlight>(approvedBookFlightState)
+   const [hasApprovedFlight, setHasApprovedFlight] = useState<boolean>(false)
 
    const getFlights = async (userInput: IUserInputState) => {
       setIsLoading(true)
@@ -122,8 +147,12 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
          child,
       }
    }
-   const getBookFlight = (bookFlight: IFlightData) => {
+   const setBookFlight = (bookFlight: IFlightData) => {
       setBookFlightCart(bookFlight)
+   }
+   const setApprovedFlight = (hasApproved: boolean, flight: IApprovedBookFlight) => {
+      setHasApprovedFlight(hasApproved)
+      setApprovedBookFlight(flight)
    }
 
    return (
@@ -136,7 +165,10 @@ const SearchFlightProvider = ({ children }: SearchFlightProviderProps) => {
                flights,
                getFlightPrice,
                bookFlightCart,
-               getBookFlight,
+               setBookFlight,
+               setApprovedFlight,
+               hasApprovedFlight,
+               setHasApprovedFlight,
             }}
          >
             {children}

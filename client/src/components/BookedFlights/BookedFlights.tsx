@@ -1,12 +1,12 @@
-import React from 'react'
 import { useSearchFlightContext } from '../../context/SearchFlightContext'
 import OneWayFlight from '../FligthsList/OneWayFlight'
+
 const BookedFlights = (): JSX.Element => {
    const { bookFlightCart } = useSearchFlightContext()
    const { oneWayTrip, message }: any = bookFlightCart
 
    return (
-      <div className="ml-28 ">
+      <div className="flex justify-center mb-10 ">
          {oneWayTrip ? (
             <>
                <OneWayFlight oneWayTrip={oneWayTrip} message={message} />

@@ -1,12 +1,22 @@
-import React from 'react'
 import BookedFlights from '../components/BookedFlights/BookedFlights'
+import CheckoutForm from '../components/Checkout/CheckoutForm'
+import SuccessMsgModal from '../components/Checkout/SuccessMsgModal'
+import { useSearchFlightContext } from '../context/SearchFlightContext'
 
-const Booking: React.FC = () => {
+const Booking = (): JSX.Element => {
+   const { hasApprovedFlight } = useSearchFlightContext()
+
    return (
       <>
-         <BookedFlights />
+         {hasApprovedFlight ? (
+            <SuccessMsgModal />
+         ) : (
+            <>
+               <BookedFlights />
+               <CheckoutForm />
+            </>
+         )}
       </>
    )
 }
-
 export default Booking
